@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>BRGRR – Build Your Burger</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <div class="logo-area">
+      <span class="logo">🍔 BRGRR</span>
+      <span class="tagline">Build. Bite. Repeat.</span>
+    </div>
+
+    <div class="login-area">
+      <form id="login-form" class="login-form">
+        <label for="username" class="visually-hidden">Username</label>
+        <input
+          type="text"
+          id="username"
+          name="username"
+          placeholder="Enter name to login"
+          required
+        />
+        <button type="submit" id="login-btn">Login</button>
+        <button type="button" id="logout-btn" class="secondary" hidden>Logout</button>
+      </form>
+      <div id="greeting" class="greeting" aria-live="polite"></div>
+    </div>
+  </header>
+
+  <main class="app-main">
+    <!-- Burger Builder + Price Panel -->
+    <section class="builder-section">
+      <h1>Customize your burger</h1>
+
+      <!-- Bun selection -->
+      <form id="burger-form" novalidate>
+        <fieldset class="card">
+          <legend>Bun type <span class="required">*</span></legend>
+
+          <div class="bun-options">
+            <label>
+              <input type="radio" name="bun" value="classic" />
+              Classic (₹30)
+            </label>
+            <label>
+              <input type="radio" name="bun" value="sesame" />
+              Sesame (₹35)
+            </label>
+            <label>
+              <input type="radio" name="bun" value="glutenFree" />
+              Gluten-Free (₹40)
+            </label>
+          </div>
+
+          <p id="bun-error" class="error-message" aria-live="polite"></p>
+        </fieldset>
+
+        <!-- Toppings (rendered dynamically by JS) -->
+        <fieldset class="card">
+          <legend>Choose toppings</legend>
+          <div id="toppings-list" class="toppings-list">
+            <!-- JS will inject topping checkboxes here -->
+          </div>
+        </fieldset>
+      </form>
+
+      <!-- Visual burger preview -->
+      <section class="burger-preview card" aria-label="Burger preview">
+        <h2>Preview</h2>
+        <div class="burger-stack">
+          <div class="bun top" id="preview-bun-top">Top Bun</div>
+          <ul id="preview-toppings" class="preview-toppings">
+            <!-- JS will render topping layers here -->
+          </ul>
+          <div class="bun bottom" id="preview-bun-bottom">Bottom Bun</div>
+        </div>
+      </section>
+    </section>
+
+    <!-- Right column: price, favorites, checkout -->
+    <aside class="side-panel">
+      <!-- Price panel -->
+      <section class="card price-card">
+        <h2>Price</h2>
+        <div class="price-row">
+          <span>Subtotal</span>
+          <span id="subtotal-amount">₹0</span>
+        </div>
+        <div class="price-row">
+          <span>Tax (5%)</span>
+          <span id="tax-amount">₹0</span>
+        </div>
+        <div class="price-row total-row">
+          <span>Total</span>
+          <span id="total-amount">₹0</span>
+        </div>
+
+        <div class="price-actions">
+          <button id="save-favorite-btn" disabled>Save as Favorite</button>
+          <button id="checkout-btn" disabled>Checkout</button>
+        </div>
+      </section>
+
+      <!-- Favorites (localStorage) -->
+      <section class="card">
+        <h2>Favorites & Recommendations</h2>
+        <p class="hint">Save a combo and we’ll show it here next time.</p>
+        <ul id="favorites-list" class="favorites-list">
+          <!-- JS renders favorite items -->
+        </ul>
+      </section>
+
+      <!-- Order history (sessionStorage) -->
+      <section class="card">
+        <h2>Order History (this session)</h2>
+        <ul id="order-history" class="order-history">
+          <!-- JS renders history items -->
+        </ul>
+      </section>
+    </aside>
+  </main>
+
+  <!-- Checkout Summary Overlay -->
+  <section id="checkout-overlay" class="checkout-overlay hidden" aria-modal="true" role="dialog">
+    <div class="checkout-modal card">
+      <h2>Checkout Summary</h2>
+      <div class="summary-row">
+        <span>Bun</span>
+        <span id="summary-bun">-</span>
+      </div>
+      <div class="summary-row">
+        <span>Toppings</span>
+        <span id="summary-toppings">-</span>
+      </div>
+      <div class="summary-row">
+        <span>Subtotal</span>
+        <span id="summary-subtotal">₹0</span>
+      </div>
+      <div class="summary-row">
+        <span>Tax (5%)</span>
+        <span id="summary-tax">₹0</span>
+      </div>
+      <div class="summary-row total-row">
+        <span>Total</span>
+        <span id="summary-total">₹0</span>
+      </div>
+
+      <div id="checkout-message" class="success-message" aria-live="polite"></div>
+
+      <div class="checkout-actions">
+        <button id="confirm-order-btn">Confirm Order</button>
+        <button id="cancel-checkout-btn" class="secondary">Cancel</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="app-footer">
+    <small>&copy; <span id="year"></span> BRGRR. Built with vanilla HTML, CSS & JS.</small>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
