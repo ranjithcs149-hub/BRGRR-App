@@ -8,7 +8,7 @@ Features live price calculation, favorites using `localStorage`, login simulatio
 ## Live Demo
 
 - **Live deployment:** `https://your-brgrr-app.netlify.app/`
-- **GitHub repository:** `https://github.com/your-username/BRGRR-App`
+- **GitHub repository:** `https://github.com/ranjithcs149-hub/BRGRR-App`
 
 > Replace the above URLs with your actual Netlify / Vercel / GitHub Pages links.
 
